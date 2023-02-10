@@ -1,13 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using ProtoLMS.Data;
+using System.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-    builder.Configuration["testdb"]
+builder.Configuration.GetConnectionString("DbContext")
     ));
+
+
 
 var app = builder.Build();
 
