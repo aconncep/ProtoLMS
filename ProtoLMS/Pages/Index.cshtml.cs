@@ -11,6 +11,11 @@ namespace ProtoLMS.Pages
         private readonly ApplicationDbContext _db;
 
         public IEnumerable<User> Users;
+
+        public int NumOrganizations { get; set; }
+        public int NumInstructors { get; set; }
+        public int NumStudents { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext applicationDbContext)
         {
             _logger = logger;
@@ -19,7 +24,9 @@ namespace ProtoLMS.Pages
 
         public void OnGet()
         {
-            Users = _db.User;
+            NumOrganizations = _db.Organization.Count();
+            NumInstructors = _db.Instructor.Count();
+            NumStudents = _db.Student.Count();
         }
     }
 }
