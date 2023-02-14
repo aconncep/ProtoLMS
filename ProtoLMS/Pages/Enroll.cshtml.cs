@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProtoLMS.Data;
 using ProtoLMS.Models;
+using System.Security.Cryptography;
 
 namespace ProtoLMS.Pages
 {
@@ -41,6 +42,12 @@ namespace ProtoLMS.Pages
                 _db.Administrator.Add(administrator);
 
                 await _db.SaveChangesAsync();
+
+                
+                HttpContext.Session.SetString("username", FormData.Username);
+                HttpContext.Session.SetString("orgID", organization.Id.ToString());
+                return RedirectToPage("./AdminPanel");
+
             }
 
             return RedirectToPage("./Index");

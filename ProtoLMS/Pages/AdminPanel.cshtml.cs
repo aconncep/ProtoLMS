@@ -38,7 +38,7 @@ namespace ProtoLMS.Pages
 
 
             organization = _db.Organization.SingleOrDefault(r => r.Id == orgIDint);
-            administrator = _db.Administrator.SingleOrDefault(r => (r.Id == orgIDint) && (r.Username == username));
+            administrator = _db.Administrator.SingleOrDefault(r => (r.Organization.Id == orgIDint) && (r.Username == username));
             return Page();
 
         }
