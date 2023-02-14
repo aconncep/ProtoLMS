@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ProtoLMS.Data;
-using System.Configuration;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 

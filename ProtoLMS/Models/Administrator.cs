@@ -8,6 +8,19 @@ namespace ProtoLMS.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Username { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public Organization Organization { get; set; }
+
     }
 }
