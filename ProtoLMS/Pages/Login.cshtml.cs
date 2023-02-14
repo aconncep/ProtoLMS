@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.SqlServer.Server;
@@ -14,7 +15,6 @@ namespace ProtoLMS.Pages
         private readonly ApplicationDbContext _db;
 
         public Organization? organization;
-        public int x;
 
         [BindProperty]
         public LoginFormData? FormData { get; set; }
@@ -26,10 +26,17 @@ namespace ProtoLMS.Pages
             _db = applicationDbContext;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            // Todo: check account type here
+            if (HttpContext.Session.GetString("username") != null)
+            {
+                return RedirectToPage("./AdminPanel");
+            }
+
             int orgId = int.Parse(HttpContext.Request.Query["org"].ToString());
             organization = _db.Organization.SingleOrDefault(r => r.Id == orgId);
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -47,14 +54,16 @@ namespace ProtoLMS.Pages
                     var verificationResult = hasher.VerifyHashedPassword(administrator, administrator.Password, FormData.Password);
                     if (verificationResult == PasswordVerificationResult.Success)
                     {
-                        return RedirectToPage("./Index", new { success = true});
+                        HttpContext.Session.SetString("username", FormData.Username);
+                        HttpContext.Session.SetString("orgID", orgId.ToString());
+                        return RedirectToPage("./AdminPanel");
                     }
                 }
 
 
             }
 
-            return RedirectToPage("./Index", new { success = false });
+            return RedirectToPage("./Index");
 
         }
     }

@@ -52,7 +52,7 @@ namespace ProtoLMS.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("Administrator");
+                    b.ToTable("Administrator", (string)null);
                 });
 
             modelBuilder.Entity("ProtoLMS.Models.Instructor", b =>
@@ -69,7 +69,7 @@ namespace ProtoLMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructor");
+                    b.ToTable("Instructor", (string)null);
                 });
 
             modelBuilder.Entity("ProtoLMS.Models.Organization", b =>
@@ -86,7 +86,7 @@ namespace ProtoLMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organization");
+                    b.ToTable("Organization", (string)null);
                 });
 
             modelBuilder.Entity("ProtoLMS.Models.Student", b =>
@@ -103,7 +103,7 @@ namespace ProtoLMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Student", (string)null);
                 });
 
             modelBuilder.Entity("ProtoLMS.Models.User", b =>
@@ -120,7 +120,7 @@ namespace ProtoLMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("ProtoLMS.Models.Administrator", b =>
